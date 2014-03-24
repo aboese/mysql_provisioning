@@ -3,6 +3,7 @@ Please note that the database should not be replicated between instances, unless
 
 
 Provisioning Database 
+
 classes - definition of all user types
 db - this is temporary holding table for imports that are being moved to db_audit
 db_audit - this is a table showing the mysql.db table values for all the servers. this is run via mysql_audit_stuff.sh, which should be in a repo shortly
@@ -20,12 +21,14 @@ There are three types of scripts that are part of this: prep, pull, audit script
 Scripts
 
 Prep
+
 get_user_deltas.sql - This finds the delta for the mysql user tables.
 get_db_deltas.sql - This finds the delta for the mysql db tables.
 update_user_delta_defaults.sql - This applies defaults that are unique to specific db instances.
 update_user_delta_blank_password.sql - This prevents passwords from ever being set to blank.
 
 Pull
+
 get_provisioning_update_delta.sh - This script grabs the provisioning data across to the local db instance on local provisioning db. Global user access should be the same across database instances for all user types. This will not be so for every db in an instance. This simplifies greatly the user table update.
 update_user_deltas.sql - This updates accounts that exist in user table but have been changed.
 update_db_deltas.sql - This updates accounts that exist in db table but have been changed.
@@ -33,4 +36,5 @@ insert_user_deltas.sql - This inserts accounts that do not exist in user table.
 insert_db_deltas.sql -  This inserts accounts that do not exist in db table.
 
 Audit
+
 mysql_audit_stuff.sh - This gets an audit for all the servers so that deltas can be established.
