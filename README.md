@@ -1,1 +1,2 @@
 This is a provisioning database to keep MySQL instances in sync.
+Please note that the database should not be replicated between instances, unless you want slaves to carry the exact same permissions as master databases, which is not usually the case. This can be accomplished by excluding provisioning database from replication, or embedding statements between "SET sql_log_bin=0;" and "SET sql_log_bin=1;" respectively.
